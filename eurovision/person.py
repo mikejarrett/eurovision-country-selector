@@ -2,6 +2,8 @@
 import csv
 import re
 
+from .utils import sanitize_string
+
 
 class Person(object):
 
@@ -24,6 +26,9 @@ class Person(object):
             countries = []
         self.countries = countries
         for country in countries:
+            if country.startswith('__') and country.endswith('__'):
+                # We don't want to override special names such as ``__init__``
+                continue
             setattr(self, country, 0)
 
     def get_country_and_maximum_assignments(self):
@@ -88,7 +93,3 @@ def build_list_of_people(people, countries, excluded_countries=None):
         Person(name, countries, excluded_countries)
         for name in people
     ]
-
-
-def sanitize_string(string):
-    return re.sub(r'[^a-zA-Z]', '_', string)

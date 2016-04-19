@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from unittest2 import TestCase
+
 from ..person import (
     Person,
     build_list_of_people,
     build_list_of_people_from_csv,
-    sanitize_string
 )
+
 
 class TestPersonObject(TestCase):
 
@@ -21,7 +22,7 @@ class TestPersonObject(TestCase):
 class TestHelperFunctions(TestCase):
 
     def setUp(self):
-        self.countries = ['Ireland']
+        self.countries = ['Ireland', '__dict__']
 
     def test_build_list_of_people_from_csv_no_exclude(self):
         ret_val = build_list_of_people_from_csv(
@@ -57,17 +58,3 @@ class TestHelperFunctions(TestCase):
         for person in ret_val:
             self.assertTrue(hasattr(person, 'Ireland'))
             self.assertEqual(person.excluded_countries, ['Croatia'])
-
-    def test_sanitize_string(self):
-        test_cases = (
-            ('Côte d’Ivoire', 'C_te_d_Ivoire'),
-            ('United Kingdom', 'United_Kingdom'),
-            ('<foo val=“bar” />', '_foo_val__bar____')
-        )
-
-        for name, expected in test_cases:
-            self.assertEqual(
-                sanitize_string(name),
-                expected,
-                'Testing string: {}'.format(name)
-            )

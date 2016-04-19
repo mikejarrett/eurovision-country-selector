@@ -14,10 +14,10 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as file_:
 
 setup(
     name="eurovision-country-selector",
-    version="1.0.2",
+    version="1.0.0.2016",
     author='Mike Jarrett',
     author_email='mike<dot>d<dot>jarrett<at>gmail<dot>com',
-    description='TODO',
+    description='Select a country for your EuroVision party.',
     long_description=long_description,
     url='https://github.com/mikejarrett/eurovision-country-selector',
     license='MIT',
@@ -25,7 +25,7 @@ setup(
     tests_require=['nose', 'coverage', 'unittest2'],
     entry_points={
         'console_scripts': [
-            'eurovision=main:main',
+            'eurovision=eurovision.cli:main',
         ],
     }
 )

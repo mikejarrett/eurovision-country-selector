@@ -16,7 +16,9 @@ from .person import (
 
 from .utils import sanitize_string
 
+
 COUNTRIES_CSV_FILEPATH = 'eurovision/data/countries-2016.csv'
+
 
 def main():  # pragma: no cover
     parser = argparse.ArgumentParser(

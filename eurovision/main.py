@@ -11,7 +11,7 @@ from person import (
 )
 
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(
         description='Select countries for people when watching EuroVision.',
         add_help=True
@@ -73,3 +73,6 @@ if __name__ == '__main__':
 
     people = EuroVision.add_countries_to_people(people, countries, args.loops)
     EuroVision.write_data_to_csv_print_results(args.outfile, people, countries)
+
+if __name__ == '__main__':
+    main()

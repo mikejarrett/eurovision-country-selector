@@ -8,6 +8,7 @@ Useage
 
 
   $ eurovision --people people.csv  --outfile whos-got-what.csv
+  
   Mike -- Hungary (36)
 
 

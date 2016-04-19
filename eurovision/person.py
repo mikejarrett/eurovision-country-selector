@@ -52,10 +52,12 @@ def build_list_of_people_from_csv(filename, countries):
     with open(filename, 'r') as opened_file:
         reader = csv.reader(opened_file)
         for row in reader:
-            excluded_countries = [
-                sanitize_country_name(name)
-                for name in row[1].split(',')
-            ]
+            excluded_countries = []
+            if len(row) > 1:
+                excluded_countries = [
+                    sanitize_string(name)
+                    for name in row[1].split(',')
+                ]
             people.append(
                 Person(
                     name=row[0],
@@ -63,6 +65,7 @@ def build_list_of_people_from_csv(filename, countries):
                     excluded_countries=excluded_countries
                 )
             )
+
     return people
 
 
@@ -87,5 +90,5 @@ def build_list_of_people(people, countries, excluded_countries=None):
     ]
 
 
-def sanitize_country_name(name):
-    return re.sub(r'[^a-zA-Z]', '_', name)
+def sanitize_string(string):
+    return re.sub(r'[^a-zA-Z]', '_', string)

@@ -7,7 +7,7 @@ from eurovision import EuroVision
 from person import (
     build_list_of_people,
     build_list_of_people_from_csv,
-    sanitize_country_name
+    sanitize_string
 )
 
 

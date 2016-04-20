@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=invalid-name
 from unittest2 import TestCase
 
 from ..person import (
@@ -17,6 +18,10 @@ class TestPersonObject(TestCase):
         expected = ('Ireland', 1)
         self.assertEqual(ret_val, expected)
         self.assertEqual(person.Croatia, 0)
+
+    def test_person_no_countries(self):
+        person = Person('Mike', None)
+        self.assertEqual(person.countries, [])
 
 
 class TestHelperFunctions(TestCase):

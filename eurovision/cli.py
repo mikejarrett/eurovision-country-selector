@@ -71,7 +71,7 @@ def main():  # pragma: no cover
 
     if args.countrieslist:
         countries = [
-            sanitize_country_name(country)
+            sanitize_string(country)
             for country in args.countries
         ]
     elif args.countries:

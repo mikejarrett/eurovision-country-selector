@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import csv
-import re
 
 from .utils import sanitize_string
 

@@ -7,7 +7,7 @@ from unittest2 import TestCase
 from ..eurovision import (
     add_countries_to_people,
     get_countries_from_csv,
-    write_data_to_csv_print_results
+    write_data_to_csv
  )
 
 from ..person import Person
@@ -45,12 +45,8 @@ class TestEuroVision(TestCase):
         with self.assertRaises(RuntimeError):
             add_countries_to_people(people, self.countries, loop_count=1)
 
-    def test_write_data_to_csv_print_results(self):
-        write_data_to_csv_print_results(
-            'test.csv',
-            self.people,
-            self.countries
-        )
+    def test_write_data_to_csv(self):
+        write_data_to_csv('test.csv', self.people, self.countries)
         with open('test.csv', 'r') as test_csv:
             self.assertEqual(
                 test_csv.read().replace('\n', ''),

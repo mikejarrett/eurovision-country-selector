@@ -40,9 +40,6 @@ def add_countries_to_people(people, countries, loop_count=1000):
     Once a valid country is selected, increment the count for that country
     on the person.
 
-    Call ``write_data_to_csv_print_results`` to write the data to a csv and
-    print the results.
-
     Args:
         people (list): List of instantiated ``Person`` objects.
         countries (list): List of strings that represent countries.
@@ -74,7 +71,7 @@ def add_countries_to_people(people, countries, loop_count=1000):
     return people
 
 
-def write_data_to_csv_print_results(csv_name, people, countries):
+def write_data_to_csv(csv_name, people, countries):
     """ Loop through the list of people and write them to a csv.
 
     Args:
@@ -92,12 +89,13 @@ def write_data_to_csv_print_results(csv_name, people, countries):
             ]
             writer.writerow(person_row)
 
-            country, maximum = person.get_country_and_maximum_assignments()
 
-            print(
-                '{} -- {} ({})'.format(
-                    person.name,
-                    country,
-                    maximum
-                )
-            )
+def print_results(people):  # pragma: no cover
+    """ Loop through the list of people and print them to console.
+
+    Args:
+        people (list): List of instantiated ``Person`` objects.
+    """
+    for person in people:
+        country, maximum = person.get_country_and_maximum_assignments()
+        print('{} -- {} ({})'.format(person.name, country, maximum))

@@ -76,7 +76,7 @@ def build_list_of_people(people, countries, excluded_countries=None):
     Args:
         people (list): List of strings representing names.
         countries (Optional(list)): List of countries that will be used to
-            build dynamic attributes.
+            build ``countries_dict``
         excluded_countries (Optional(list)): List of countries to that
             the person should not select.
 

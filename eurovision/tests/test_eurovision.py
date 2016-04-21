@@ -27,7 +27,7 @@ class TestEuroVision(TestCase):
         countries = get_countries_from_csv(
             'eurovision/tests/csv/countries.csv'
         )
-        expected = ['Ireland', 'Sweden']
+        expected = ['Ireland', 'Sweden', 'C__te_d___Ivoire']
         self.assertEqual(countries, expected)
 
     def test_add_countries_to_people(self):
@@ -48,8 +48,7 @@ class TestEuroVision(TestCase):
     def test_write_data_to_csv(self):
         write_data_to_csv('test.csv', self.people, self.countries)
         with open('test.csv', 'r') as test_csv:
-            self.assertEqual(
-                test_csv.read().replace('\n', ''),
-                'name,IrelandMike,0'
-            )
+            csv_data = test_csv.read()
+            self.assertTrue('name,Ireland' in csv_data)
+            self.assertTrue('Mike,0' in csv_data)
         os.remove('test.csv')

@@ -27,5 +27,17 @@ setup(
         'console_scripts': [
             'eurovision=eurovision.cli:main',
         ],
-    }
+    },
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: End Users/Desktop',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.0',
+        'Programming Language :: Python :: 3.1',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Operating System :: POSIX :: Linux',
+        'Operating System :: Microsoft :: Windows :: Windows 10'
+    ],
 )

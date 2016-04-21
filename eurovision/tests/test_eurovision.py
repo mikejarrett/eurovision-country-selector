@@ -38,7 +38,7 @@ class TestEuroVision(TestCase):
         )
         person = ret_val[0]
         self.assertEqual(person.name, 'Mike')
-        self.assertEqual(person.Ireland, 1)
+        self.assertEqual(person.countries_dict['Ireland'], 1)
 
     def test_add_countries_to_people_no_endless_loop(self):
         people = [Person('Mike', self.countries, self.countries)]

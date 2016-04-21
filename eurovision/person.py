@@ -24,11 +24,8 @@ class Person(object):
         if countries is None:
             countries = []
         self.countries = countries
-        for country in countries:
-            if country.startswith('__') and country.endswith('__'):
-                # We don't want to override special names such as ``__init__``
-                continue
-            setattr(self, country, 0)
+        
+        self.countries_dict = {country: 0 for country in countries}
 
     def get_country_and_maximum_assignments(self):
         """ Retrieve the country with the maximum number of hits.
@@ -38,8 +35,7 @@ class Person(object):
         """
         maximum = 0
         country_name = ''
-        for country in self.countries:
-            value = getattr(self, country, 0)
+        for country, value in self.countries_dict.items():
             if value > maximum:
                 maximum = value
                 country_name = country
@@ -47,8 +43,10 @@ class Person(object):
         return country_name, maximum
 
     def increment_country_hit(self, country):
-        count = getattr(self, country, 0) + 1
-        setattr(self, country, count)
+        try:
+            self.countries_dict[country] += 1
+        except KeyError:
+            pass
 
 
 def build_list_of_people_from_csv(filename, countries):

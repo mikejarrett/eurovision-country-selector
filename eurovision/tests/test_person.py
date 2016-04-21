@@ -17,7 +17,7 @@ class TestPersonObject(TestCase):
         ret_val = person.get_country_and_maximum_assignments()
         expected = ('Ireland', 1)
         self.assertEqual(ret_val, expected)
-        self.assertEqual(person.Croatia, 0)
+        self.assertEqual(person.countries_dict['Croatia'], 0)
 
     def test_person_no_countries(self):
         person = Person('Mike', None)
@@ -51,7 +51,7 @@ class TestHelperFunctions(TestCase):
         ret_val = build_list_of_people(['Mike', 'Bill'], self.countries)
         self.assertEqual(len(ret_val), 2)
         for person in ret_val:
-            self.assertTrue(hasattr(person, 'Ireland'))
+            self.assertEqual(person.countries_dict['Ireland'], 0)
 
     def test_build_list_of_people_with_excluded_countries(self):
         ret_val = build_list_of_people(
@@ -61,5 +61,5 @@ class TestHelperFunctions(TestCase):
         )
         self.assertEqual(len(ret_val), 2)
         for person in ret_val:
-            self.assertTrue(hasattr(person, 'Ireland'))
+            self.assertEqual(person.countries_dict['Ireland'], 0)
             self.assertEqual(person.excluded_countries, ['Croatia'])

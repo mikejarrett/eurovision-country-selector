@@ -1,7 +1,8 @@
 EuroVision Country Selector
 ===========================
 
-[![Build Status](https://travis-ci.org/mikejarrett/eurovision-country-selector.svg?branch=master)](https://travis-ci.org/mikejarrett/eurovision-country-selector)
+.. image:: https://travis-ci.org/mikejarrett/eurovision-country-selector.svg?branch=master
+    :target: https://travis-ci.org/mikejarrett/eurovision-country-selector
 
 Select a country for your EuroVision party.
 

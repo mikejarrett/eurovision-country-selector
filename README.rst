@@ -1,6 +1,8 @@
 EuroVision Country Selector
 ===========================
 
+https://travis-ci.org/mikejarrett/eurovision-country-selector.svg?branch=master
+
 Select a country for your EuroVision party.
 
 Useage

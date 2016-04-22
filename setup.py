@@ -40,4 +40,6 @@ setup(
         'Operating System :: POSIX :: Linux',
         'Operating System :: Microsoft :: Windows :: Windows 10'
     ],
+    package_data={'eurovision/data/': ['eurovision/data/countries-2016.csv']},
+    include_package_data=True,
 )

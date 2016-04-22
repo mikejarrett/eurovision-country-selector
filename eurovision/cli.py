@@ -7,7 +7,7 @@ from .eurovision import (
     add_countries_to_people,
     get_countries_from_csv,
     print_results,
-    write_data_to_csv_print_results
+    write_data_to_csv
 )
 
 from .person import (

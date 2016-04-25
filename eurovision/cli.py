@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=invalid-name
-import sys
 import argparse
+import os
+import sys
 
 from .eurovision import (
     add_countries_to_people,
@@ -19,7 +20,10 @@ from .person import (
 from .utils import sanitize_string
 
 
-COUNTRIES_CSV_FILEPATH = 'eurovision/data/countries-2016.csv'
+COUNTRIES_CSV_FILEPATH = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),  # Current directory
+    'data/countries-2016.csv'  # Current countries-csv
+)
 
 
 def main():  # pragma: no cover

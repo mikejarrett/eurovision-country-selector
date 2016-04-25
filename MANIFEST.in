@@ -1,0 +1,2 @@
+include eurovision/data/countries-2016.csv
+recursive-include examples *.csv *.py eurovision/data

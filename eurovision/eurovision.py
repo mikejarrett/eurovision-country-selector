@@ -99,3 +99,21 @@ def print_results(people):  # pragma: no cover
     for person in people:
         country, maximum = person.get_country_and_maximum_assignments()
         print('{} -- {} ({})'.format(person.name, country, maximum))
+
+
+def is_there_duplicate_countries(people, count=0, limit=10):
+    already_select_countries = []
+    if count > limit:
+        raise RuntimeError(
+            "Couldn't find a permutation where countries weren't assinged "
+            "more than once."
+        )
+
+    for person in people:
+        country, __  = person.get_country_and_maximum_assignments()
+        if country in already_select_countries:
+            return True
+        else:
+            already_select_countries.append(country)
+
+    return False

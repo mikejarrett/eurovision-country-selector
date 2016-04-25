@@ -6,6 +6,7 @@ import argparse
 from .eurovision import (
     add_countries_to_people,
     get_countries_from_csv,
+    is_there_duplicate_countries,
     print_results,
     write_data_to_csv
 )
@@ -106,8 +107,14 @@ def main():  # pragma: no cover
         sys.exit(1)
 
     people = add_countries_to_people(people, countries, args.loops)
+
+    count = 1
+    while not is_there_duplicate_countries(people, count, limit=10):
+        people = add_countries_to_people(people, countries, args.loops)
+        count += 1
+
     if args.outfile:
-        write_data_to_csv_print_results(args.outfile, people, countries)
+        write_data_to_csv(args.outfile, people, countries)
 
     print_results(people)
 

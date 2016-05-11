@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=invalid-name
+import logging
 import os
+import sys
 
 from unittest2 import TestCase
 
 from ..eurovision import (
     add_countries_to_people,
     get_countries_from_csv,
-    write_data_to_csv
- )
+    is_there_duplicate_countries,
+    write_data_to_csv,
+)
+
 
 from ..person import Person
 
@@ -27,7 +31,13 @@ class TestEuroVision(TestCase):
         countries = get_countries_from_csv(
             'eurovision/tests/csv/countries.csv'
         )
-        expected = ['Ireland', 'Sweden', 'C__te_d___Ivoire']
+
+        # Some python version hackery
+        if sys.version_info < (3, 0):
+            expected = ['Ireland', 'Sweden', 'C__te_d___Ivoire']
+        else:
+            expected = ['Ireland', 'Sweden', 'C_te_d_Ivoire']
+
         self.assertEqual(countries, expected)
 
     def test_add_countries_to_people(self):
@@ -52,3 +62,43 @@ class TestEuroVision(TestCase):
             self.assertTrue('name,Ireland' in csv_data)
             self.assertTrue('Mike,0' in csv_data)
         os.remove('test.csv')
+
+    def test_is_there_duplicate_countries_is_true(self):
+        mike = Person('Mike', self.countries)
+        mike.countries_dict['Ireland'] = 1
+
+        eugene = Person('Eugene', self.countries)
+        eugene.countries_dict['Ireland'] = 1
+
+        country, maximum = mike.get_country_and_maximum_assignments()
+        self.assertEqual(country, 'Ireland')
+        self.assertEqual(maximum, 1)
+
+        country, maximum = eugene.get_country_and_maximum_assignments()
+        self.assertEqual(country, 'Ireland')
+        self.assertEqual(maximum, 1)
+
+        ret_val = is_there_duplicate_countries([mike, eugene])
+        self.assertTrue(ret_val)
+
+    def test_is_there_duplicate_countries_is_false(self):
+        mike = Person('Mike', self.countries + ['Croatia'])
+        mike.countries_dict['Croatia'] = 1
+
+        eugene = Person('Eugene', self.countries)
+        eugene.countries_dict['Ireland'] = 1
+
+        country, maximum = mike.get_country_and_maximum_assignments()
+        self.assertEqual(country, 'Croatia')
+        self.assertEqual(maximum, 1)
+
+        country, maximum = eugene.get_country_and_maximum_assignments()
+        self.assertEqual(country, 'Ireland')
+        self.assertEqual(maximum, 1)
+
+        ret_val = is_there_duplicate_countries([mike, eugene])
+        self.assertFalse(ret_val)
+
+    def test_is_there_duplicate_countries_runtime_error(self):
+        with self.assertRaises(RuntimeError):
+            is_there_duplicate_countries([], count=2, limit=1)

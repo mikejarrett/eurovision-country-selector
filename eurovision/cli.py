@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=invalid-name
-import sys
 import argparse
+import os
+import sys
 
 from .eurovision import (
     add_countries_to_people,
     get_countries_from_csv,
+    is_there_duplicate_countries,
     print_results,
     write_data_to_csv
 )
@@ -18,7 +20,10 @@ from .person import (
 from .utils import sanitize_string
 
 
-COUNTRIES_CSV_FILEPATH = 'eurovision/data/countries-2016.csv'
+COUNTRIES_CSV_FILEPATH = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),  # Current directory
+    'data/countries-2016.csv'  # Current countries-csv
+)
 
 
 def main():  # pragma: no cover
@@ -106,8 +111,14 @@ def main():  # pragma: no cover
         sys.exit(1)
 
     people = add_countries_to_people(people, countries, args.loops)
+
+    count = 1
+    while not is_there_duplicate_countries(people, count, limit=10):
+        people = add_countries_to_people(people, countries, args.loops)
+        count += 1
+
     if args.outfile:
-        write_data_to_csv_print_results(args.outfile, people, countries)
+        write_data_to_csv(args.outfile, people, countries)
 
     print_results(people)
 

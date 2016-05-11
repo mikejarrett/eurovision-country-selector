@@ -14,7 +14,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as file_:
 
 setup(
     name="eurovision-country-selector",
-    version="1.0.0.2016",
+    version="1.0.5.2016",
     author='Mike Jarrett',
     author_email='mike<dot>d<dot>jarrett<at>gmail<dot>com',
     description='Select a country for your EuroVision party.',
@@ -39,7 +39,6 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Operating System :: POSIX :: Linux',
-        'Operating System :: Microsoft :: Windows :: Windows 10'
     ],
     package_data={'eurovision/data/': ['eurovision/data/countries-2016.csv']},
     include_package_data=True,

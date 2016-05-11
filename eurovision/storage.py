@@ -2,14 +2,14 @@
 from abc import ABCMeta, abstractmethod
 import csv
 
+from six import with_metaclass
+
 
 class DoesNotExist(Exception):
     pass
 
 
-class ABCStorageMixin(metaclass=ABCMeta):
-
-    __metaclass__ = ABCMeta
+class ABCStorageMixin(with_metaclass(ABCMeta)):
 
     @abstractmethod
     def persist(self, **kwargs):
@@ -108,7 +108,7 @@ class CSVStorage(PureMemoryStorage):
     storage_name = 'CSV Storage'
 
     def __init__(self, file_name):
-        super().__init__()
+        super(CSVStorage, self).__init__()
         self.file_name = file_name
 
     def __enter__(self):

@@ -22,6 +22,7 @@ setup(
     url='https://github.com/mikejarrett/eurovision-country-selector',
     license='MIT',
     packages=find_packages(),
+    install_requires=['six<=1.10.0'],
     tests_require=['nose', 'coverage', 'unittest2'],
     entry_points={
         'console_scripts': [
